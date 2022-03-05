@@ -12,5 +12,6 @@ add_library(BmpPP
 
     BMP.cpp
     BmpWriter.cpp
+    BmpReader.cpp
     BmpHeader.cpp
 )

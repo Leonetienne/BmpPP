@@ -1,8 +1,7 @@
 #include "BMP.h"
-#include <iostream>
-#include <fstream>
 #include <stdexcept>
 #include "BmpWriter.h"
+#include "BmpReader.h"
 
 #define CHECK_IF_INITIALIZED if (!isInitialized) throw std::runtime_error("Image not initialized!");
 
@@ -10,6 +9,14 @@ namespace Leonetienne::BmpPP {
 
     BMP::BMP() {
         // Do nothing
+        return;
+    }
+
+
+    BMP::BMP(const std::string &filename) {
+        if(!Read(filename))
+            throw std::runtime_error("Unable to read bmp image!");
+
         return;
     }
 
@@ -57,17 +64,7 @@ namespace Leonetienne::BmpPP {
     }
 
     bool BMP::Read(const std::string &filename) {
-
-        std::ifstream ifs(filename, std::ifstream::binary);
-        if (!ifs.good())
-            return false;
-
-        // When reading the image, we don't care about most of the header.
-        // All we want is the images resolutions, bits-per-pixel, and pixelbuffer address...
-        // This is because we do not support ALL of bmp, but just the most common formats...
-
-
-        return true;
+        return BmpReader::Read(*this, filename);
     }
 
     std::uint8_t *BMP::GetPixel(const Eule::Vector2i &position) {

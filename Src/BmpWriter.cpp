@@ -33,10 +33,10 @@ namespace Leonetienne::BmpPP {
         const std::size_t numChannels = image.GetNumColorChannels();
 
         // Calculate how many padding bytes to add per row
-        std::size_t paddingBytesPerRow = (4 - ((image.size.x * numChannels) % 4)) % 4;
+        const std::size_t paddingBytesPerRow = (4 - ((image.size.x * numChannels) % 4)) % 4;
 
         // Iterate over all pixel rows
-        for (std::size_t y = 0; y < image.size.y; y++) {
+        for (std::int64_t y = image.size.y-1; y >= 0; y--) {
             const std::size_t rowIndex = y * image.size.x * numChannels;
 
             for (std::size_t x = 0; x < image.size.x; x++) {

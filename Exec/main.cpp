@@ -6,6 +6,7 @@ using namespace Leonetienne::BmpPP;
 
 int main() {
 
+    /*
     BMP bmp({800, 600}, Colormode::RGB);
 
     for (int x = 0; x < 800; x++)
@@ -19,8 +20,19 @@ int main() {
         );
     }
 
-    if (!bmp.Write("test.bmp"))
-        std::cerr << "What the hell" << std::endl;
+    */
+
+    BMP bmp;
+
+    if (!bmp.Read("test.bmp"))
+        std::cerr << "Failed to read" << std::endl;
+
+    std::cout << (bmp.GetColormode() == Colormode::RGB) << std::endl;
+
+    if (!bmp.Write("testwrite.bmp"))
+       std::cerr << "What the hell" << std::endl;
+
+
 
     return 0;
 }

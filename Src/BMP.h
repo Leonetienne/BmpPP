@@ -9,11 +9,18 @@
 namespace Leonetienne::BmpPP {
 
     class BmpWriter;
+    class BmpReader;
 
     class BMP {
     public:
+        // Will create an uninitialized image
         BMP();
+
+        //! Will create an image with the entire pixel buffer set to 0
         explicit BMP(const Eule::Vector2i& size, const Colormode& colormode = Colormode::RGBA);
+
+        //! Will create a image and read it from a bmp file
+        explicit BMP(const std::string& filename);
 
         //! Will return a pointer to the first byte of a pixel at a given position
         std::uint8_t* GetPixel(const Eule::Vector2i& position);
@@ -66,6 +73,7 @@ namespace Leonetienne::BmpPP {
         bool isInitialized = false;
 
         friend class BmpWriter;
+        friend class BmpReader;
     };
 
 }
