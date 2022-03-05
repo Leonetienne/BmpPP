@@ -8,6 +8,8 @@
 
 namespace Leonetienne::BmpPP {
 
+    class BmpWriter;
+
     class BMP {
     public:
         BMP();
@@ -53,11 +55,17 @@ namespace Leonetienne::BmpPP {
         //! Returns false, if unable to open the file
         bool Write(const std::string& filename) const;
 
+        //! Will read a bmp image from a file.
+        //! Returns false, if unable to open, or parse, file
+        bool Read(const std::string& filename);
+
     private:
         Eule::Vector2i size;
         Colormode colormode;
         std::vector<std::uint8_t> pixelBuffer;
         bool isInitialized = false;
+
+        friend class BmpWriter;
     };
 
 }
