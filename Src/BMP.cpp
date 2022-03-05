@@ -11,7 +11,28 @@ namespace Leonetienne::BmpPP {
         size { size },
         colormode { colormode }
     {
+        ReInitialize(size, colormode);
 
+        return;
+    }
+
+    void BMP::ReInitialize(const Eule::Vector2i &size) {
+        // Carry over new attributes
+        this->size = size;
+
+        // Re-initialize the pixelbuffer
+        pixelBuffer.clear();
+        pixelBuffer.resize(size.x * size.y * GetNumColorChannels());
+
+        return;
+    }
+
+    void BMP::ReInitialize(const Eule::Vector2i &size, const Colormode &colormode) {
+        // Carry over new attributes
+        this->size = size;
+        this->colormode = colormode;
+
+        // Re-initialize the pixelbuffer
         pixelBuffer.clear();
         pixelBuffer.resize(size.x * size.y * GetNumColorChannels());
 

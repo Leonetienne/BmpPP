@@ -24,6 +24,12 @@ namespace Leonetienne::BmpPP {
         //! Will set the color of a pixel at a given position
         void SetPixel(const Eule::Vector2i& position, const std::uint8_t r, const std::uint8_t g, const std::uint8_t b, const std::uint8_t a = 0xFF);
 
+        //! Will basically reconstruct this image, to fit a new resolution
+        void ReInitialize(const Eule::Vector2i& size);
+
+        //! Will basically reconstruct this image, to fit a new resolution and new format
+        void ReInitialize(const Eule::Vector2i& size, const Colormode& colormode);
+
         //! Will return a pointer to the raw pixel data
         std::uint8_t* data();
 
