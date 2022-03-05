@@ -24,10 +24,25 @@ namespace Leonetienne::BmpPP {
         //! Will set the color of a pixel at a given position
         void SetPixel(const Eule::Vector2i& position, const std::uint8_t r, const std::uint8_t g, const std::uint8_t b, const std::uint8_t a = 0xFF);
 
-    private:
-        //! Will return the corresponding pixel size (in bytes) of a colormode. Like, 3 for RGB and 4 for RGBA.
-        static int ColormodeToPixelSize(const Colormode& colormode);
+        //! Will return a pointer to the raw pixel data
+        std::uint8_t* data();
 
+        //! Will return a pointer to the raw pixel data
+        const std::uint8_t* data() const;
+
+        //! Will return the dimensions of the image
+        const Eule::Vector2i& GetDimensions() const;
+
+        //! Will return the color mode of the image
+        const Colormode& GetColormode() const;
+
+        //! Will return the amount of color channels used
+        std::size_t GetNumColorChannels() const;
+
+        //! Will return the size of the raw pixel buffer, in bytes
+        std::size_t GetPixelbufferSize() const;
+
+    private:
         Eule::Vector2i size;
         Colormode colormode;
         std::vector<std::uint8_t> pixelBuffer;

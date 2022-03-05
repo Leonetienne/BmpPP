@@ -13,23 +13,9 @@ namespace Leonetienne::BmpPP {
     {
 
         pixelBuffer.clear();
-        pixelBuffer.resize(size.x * size.y * ColormodeToPixelSize(colormode));
+        pixelBuffer.resize(size.x * size.y * GetNumColorChannels());
 
         return;
-    }
-
-    int BMP::ColormodeToPixelSize(const Colormode &colormode) {
-
-        switch (colormode) {
-            case Colormode::RGB:
-                return 3;
-
-            case Colormode::RGBA:
-                return 4;
-        }
-
-        // Unreachable
-        return -1;
     }
 
     bool BMP::Write(const std::string &filename) const {
@@ -49,7 +35,7 @@ namespace Leonetienne::BmpPP {
         // Populate dib header
         bmpHeader.dibHeader.imageWidth = size.x;
         bmpHeader.dibHeader.imageHeight = size.y;
-        bmpHeader.dibHeader.numBitsPerPixel = ColormodeToPixelSize(colormode) * 8;
+        bmpHeader.dibHeader.numBitsPerPixel = GetNumColorChannels() * 8;
         // The size of the pixel array is not known yet (because rows require to be padded)
 
 
@@ -58,7 +44,7 @@ namespace Leonetienne::BmpPP {
         packedPixels.reserve(pixelBuffer.size());
 
         // How many channels do we have?
-        const std::size_t numChannels = ColormodeToPixelSize(colormode);
+        const std::size_t numChannels = GetNumColorChannels();
 
         // Calculate how many padding bytes to add per row
         std::size_t paddingBytesPerRow = (4 - ((size.x * numChannels) % 4)) % 4;
@@ -152,7 +138,7 @@ namespace Leonetienne::BmpPP {
 
     std::uint8_t *BMP::GetPixel(const Eule::Vector2i &position) {
         const std::size_t pixelIndex =
-                (position.y * size.x + position.x) * ColormodeToPixelSize(colormode);
+                (position.y * size.x + position.x) * GetNumColorChannels();
 
         if (pixelIndex >= pixelBuffer.size())
             throw std::runtime_error("Pixel index out of range!");
@@ -162,7 +148,7 @@ namespace Leonetienne::BmpPP {
 
     const std::uint8_t *BMP::GetPixel(const Eule::Vector2i &position) const {
         const std::size_t pixelIndex =
-                (position.y * size.x + position.x) * ColormodeToPixelSize(colormode);
+                (position.y * size.x + position.x) * GetNumColorChannels();
 
         if (pixelIndex >= pixelBuffer.size())
             throw std::runtime_error("Pixel index out of range!");
@@ -194,6 +180,39 @@ namespace Leonetienne::BmpPP {
         }
 
         return;
+    }
+
+    std::uint8_t *BMP::data() {
+        return pixelBuffer.data();
+    }
+
+    const std::uint8_t *BMP::data() const {
+        return pixelBuffer.data();
+    }
+
+    const Eule::Vector2i &BMP::GetDimensions() const {
+        return size;
+    }
+
+    const Colormode &BMP::GetColormode() const {
+        return colormode;
+    }
+
+    std::size_t BMP::GetNumColorChannels() const {
+        switch (colormode) {
+            case Colormode::RGB:
+                return 3;
+
+            case Colormode::RGBA:
+                return 4;
+        }
+
+        // Unreachable
+        return -1;
+    }
+
+    std::size_t BMP::GetPixelbufferSize() const {
+        return pixelBuffer.size();
     }
 
 }
