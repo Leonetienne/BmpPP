@@ -9,4 +9,6 @@ FILE(GLOB Eule ./Eule/Eule/*.cpp)
 
 add_library(BmpPP
     ${Eule}
+
+    BMP.cpp
 )
