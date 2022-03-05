@@ -1,0 +1,3 @@
+[submodule "Src/Eule"]
+	path = Src/Eule
+	url = git@github.com:Leonetienne/Eule.git
