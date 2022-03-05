@@ -11,4 +11,5 @@ add_library(BmpPP
     ${Eule}
 
     BMP.cpp
+    BmpHeader.cpp
 )
