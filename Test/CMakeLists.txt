@@ -20,4 +20,5 @@ add_executable(Test
 
         BmpHeader.cpp
         ReInitialize.cpp
+        Uninitialized.cpp
 )

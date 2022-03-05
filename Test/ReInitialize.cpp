@@ -30,3 +30,17 @@ TEST_CASE(__FILE__"/ReInitialize", "[ReInitialize]")
 
     return;
 }
+
+// Tests that re-initializing images results in initialized images
+TEST_CASE(__FILE__"/ReInitializingWillInitialize", "[ReInitialize]")
+{
+    // Create uninitialized image
+    BMP bmp;
+    REQUIRE_FALSE(bmp.IsInitialized());
+
+    // Now re-initialize it
+    bmp.ReInitialize({800, 600});
+    REQUIRE(bmp.IsInitialized());
+
+    return;
+}

@@ -4,7 +4,14 @@
 #include <stdexcept>
 #include "BmpHeader.h"
 
+#define CHECK_IF_INITIALIZED if (!isInitialized) throw std::runtime_error("Image not initialized!");
+
 namespace Leonetienne::BmpPP {
+
+    BMP::BMP() {
+        // Do nothing
+        return;
+    }
 
     BMP::BMP(const Eule::Vector2i &size, const Colormode& colormode)
         :
@@ -17,6 +24,8 @@ namespace Leonetienne::BmpPP {
     }
 
     void BMP::ReInitialize(const Eule::Vector2i &size) {
+        isInitialized = true;
+
         // Carry over new attributes
         this->size = size;
 
@@ -28,6 +37,8 @@ namespace Leonetienne::BmpPP {
     }
 
     void BMP::ReInitialize(const Eule::Vector2i &size, const Colormode &colormode) {
+        isInitialized = true;
+
         // Carry over new attributes
         this->size = size;
         this->colormode = colormode;
@@ -40,6 +51,7 @@ namespace Leonetienne::BmpPP {
     }
 
     bool BMP::Write(const std::string &filename) const {
+        CHECK_IF_INITIALIZED
 
         // Create the bmp header
         BmpHeader bmpHeader;
@@ -158,6 +170,8 @@ namespace Leonetienne::BmpPP {
     }
 
     std::uint8_t *BMP::GetPixel(const Eule::Vector2i &position) {
+        CHECK_IF_INITIALIZED
+
         const std::size_t pixelIndex =
                 (position.y * size.x + position.x) * GetNumColorChannels();
 
@@ -168,6 +182,8 @@ namespace Leonetienne::BmpPP {
     }
 
     const std::uint8_t *BMP::GetPixel(const Eule::Vector2i &position) const {
+        CHECK_IF_INITIALIZED
+
         const std::size_t pixelIndex =
                 (position.y * size.x + position.x) * GetNumColorChannels();
 
@@ -181,7 +197,9 @@ namespace Leonetienne::BmpPP {
                   const std::uint8_t r,
                   const std::uint8_t g,
                   const std::uint8_t b,
-                  const std::uint8_t a) {
+                  const std::uint8_t a)
+    {
+        CHECK_IF_INITIALIZED
 
         std::uint8_t* pixel = GetPixel(position);
 
@@ -204,22 +222,32 @@ namespace Leonetienne::BmpPP {
     }
 
     std::uint8_t *BMP::data() {
+        CHECK_IF_INITIALIZED
+
         return pixelBuffer.data();
     }
 
     const std::uint8_t *BMP::data() const {
+        CHECK_IF_INITIALIZED
+
         return pixelBuffer.data();
     }
 
     const Eule::Vector2i &BMP::GetDimensions() const {
+        CHECK_IF_INITIALIZED
+
         return size;
     }
 
     const Colormode &BMP::GetColormode() const {
+        CHECK_IF_INITIALIZED
+
         return colormode;
     }
 
     std::size_t BMP::GetNumColorChannels() const {
+        CHECK_IF_INITIALIZED
+
         switch (colormode) {
             case Colormode::RGB:
                 return 3;
@@ -233,7 +261,15 @@ namespace Leonetienne::BmpPP {
     }
 
     std::size_t BMP::GetPixelbufferSize() const {
+        CHECK_IF_INITIALIZED
+
         return pixelBuffer.size();
     }
 
+    bool BMP::IsInitialized() const {
+        return isInitialized;
+    }
+
 }
+
+#undef CHECK_IF_INITIALIZED

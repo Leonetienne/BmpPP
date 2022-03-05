@@ -10,10 +10,8 @@ namespace Leonetienne::BmpPP {
 
     class BMP {
     public:
+        BMP();
         explicit BMP(const Eule::Vector2i& size, const Colormode& colormode = Colormode::RGBA);
-
-        //! Will write the bmp image to a file.
-        bool Write(const std::string& filename) const;
 
         //! Will return a pointer to the first byte of a pixel at a given position
         std::uint8_t* GetPixel(const Eule::Vector2i& position);
@@ -48,10 +46,18 @@ namespace Leonetienne::BmpPP {
         //! Will return the size of the raw pixel buffer, in bytes
         std::size_t GetPixelbufferSize() const;
 
+        //! Will return whether this image is initialized or not
+        bool IsInitialized() const;
+
+        //! Will write the bmp image to a file.
+        //! Returns false, if unable to open the file
+        bool Write(const std::string& filename) const;
+
     private:
         Eule::Vector2i size;
         Colormode colormode;
         std::vector<std::uint8_t> pixelBuffer;
+        bool isInitialized = false;
     };
 
 }
