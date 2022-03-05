@@ -12,5 +12,5 @@ add_executable(Test
 
 )
 
-target_link_libraries(Test {PROJECT_NAME})
+target_link_libraries(Test BmpPP)
 

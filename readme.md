@@ -1,4 +1,4 @@
-# {PROJECT_NAME}
+# BmpPP
 Run `configure.sh MyAwesomeLibrary` to give your project a name.
 
 # LICENSE
