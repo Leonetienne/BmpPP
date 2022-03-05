@@ -10,6 +10,7 @@ add_executable(Test
         Catch2.h
         main.cpp
 
+        BmpHeader.cpp
 )
 
 target_link_libraries(Test BmpPP)
