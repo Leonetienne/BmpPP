@@ -3,8 +3,8 @@ A simple, easy to use, BMP image interface for C++!
 
 Disclaimer!!:
 > This is in no way, shape or form complete or compatible with every possible bmp!
-> It does exactly what I need it to do, and that is to convert most bmp images to pixel buffers, convert between rgb/rgba/bw pixel buffers and write it all back to a bmp image.
-> I am just publishing this in case someone wants to do said things and does not care about incompatibilities with some bmps.
+> It does exactly what I need it to do, and that is to convert most bmp images to pixel buffers, convert between rgb/rgba pixel buffers and write it all back to a bmp image.
+> I am just publishing this because it will be a dependency of some of my other open source projects. Also, it may just be useful to someone who does not care about incompatibilities with some bmps.
  
 ## Basic Usage
 *Assuming:
