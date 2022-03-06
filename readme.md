@@ -1,5 +1,5 @@
 # BmpPP
-A simple, easy to use BMP image interface for C++!
+A simple, easy to use, BMP image interface for C++!
 
 Disclaimer!!:
 > This is in no way, shape or form complete or compatible with every possible bmp!
