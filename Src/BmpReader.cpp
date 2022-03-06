@@ -196,4 +196,5 @@ namespace Leonetienne::BmpPP {
         // Done.
         return true;
     }
+
 }

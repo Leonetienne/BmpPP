@@ -121,4 +121,5 @@ namespace Leonetienne::BmpPP {
 
         return true;
     }
+
 }

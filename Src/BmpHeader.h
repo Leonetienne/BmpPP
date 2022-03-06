@@ -1,5 +1,5 @@
-#ifndef BMPPP_EXEC_BMPHEADER_H
-#define BMPPP_EXEC_BMPHEADER_H
+#ifndef BMPPP_BMPHEADER_H
+#define BMPPP_BMPHEADER_H
 
 #include <cstdint>
 #include <vector>
@@ -93,6 +93,7 @@ namespace Leonetienne::BmpPP {
             return;
         };
     };
+
 }
 
-#endif //BMPPP_EXEC_BMPHEADER_H
+#endif //BMPPP_BMPHEADER_H
