@@ -73,20 +73,20 @@ namespace Leonetienne::BmpPP {
         //! Will compare two images for not being exactly identical regarding resolution, bit depth, and pixel values.
         bool operator!=(const BMP& other) const;
 
-        //! Will mirror the image horizontally
-        void MirrorHorizontally();
+        //! Will mirror the image horizontally, and return it as a new image
+        BMP MirrorHorizontally() const;
 
-        //! Will mirror the image vertically
-        void MirrorVertically();
+        //! Will mirror the image vertically, and return it as a new image
+        BMP MirrorVertically() const;
 
-        //! Will rotate the image by 90deg, clockwise
-        void Rotate90degClockwise();
+        //! Will rotate the image by 90deg, clockwise, and return it as a new image
+        BMP Rotate90degClockwise() const;
 
-        //! Will rotate the image by 90deg, counterclockwise
-        void Rotate90degCounterclockwise();
+        //! Will rotate the image by 90deg, counterclockwise, and return it as a new image
+        BMP Rotate90degCounterclockwise() const;
 
-        //! Will rotate the image by 180deg
-        void Rotate180deg();
+        //! Will rotate the image by 180deg, and return it as a new image
+        BMP Rotate180deg() const;
 
         //! Will convert the images colormode
         void ConvertColormode(const Colormode& colormode);
@@ -95,7 +95,7 @@ namespace Leonetienne::BmpPP {
         void SwapChannels(const std::size_t& channel1, const std::size_t& channel2);
 
         //! Will copy the specified rectangle-area, and return it as a new image
-        BMP Crop(const Eule::Rect& area);
+        BMP Crop(const Eule::Rect& area) const;
 
         //! Will fill a specific channel with a value
         void FillChannel(const std::size_t& channel, const std::uint8_t value);
