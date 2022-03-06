@@ -1,0 +1,6 @@
+#ifndef TEST_VERSION_H
+#define TEST_VERSION_H
+
+#define BMPPP_VERSION 0.1
+
+#endif //TEST_VERSION_H
