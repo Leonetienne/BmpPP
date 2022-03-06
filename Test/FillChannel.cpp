@@ -104,5 +104,38 @@ TEST_CASE(__FILE__"/WillWriteTheCorrectData", "[FillChannel]")
         // Assert that they are equal
         REQUIRE(bmp == reference);
     }
+
+    return;
+}
+
+// Tests that a runtime error is thrown if the channel index is out of range
+TEST_CASE(__FILE__"/RuntimeError_on_channel_out_of_range", "[FillChannel]")
+{
+
+    SECTION("RGB_OUT_OF_RANGE") {
+        BMP bmp(Vector2i(800, 600), Colormode::RGB);
+
+        REQUIRE_THROWS_AS(
+            bmp.FillChannel(3, 0xFF)
+            , std::runtime_error
+        );
+    }
+
+    SECTION("RGBA_OK") {
+        BMP bmp(Vector2i(800, 600), Colormode::RGBA);
+
+        bmp.FillChannel(3, 0xFF);
+    }
+
+    SECTION("RGBA_OUT_OF_RANGE") {
+        BMP bmp(Vector2i(800, 600), Colormode::RGBA);
+
+        REQUIRE_THROWS_AS(
+            bmp.FillChannel(4, 0xFF)
+            , std::runtime_error
+        );
+
+    }
+
     return;
 }

@@ -75,9 +75,10 @@ TEST_CASE(__FILE__"/RuntimeError_on_channel_out_of_range", "[SwapChannels]")
         BMP bmp(Vector2i(800, 600), Colormode::RGBA);
 
         REQUIRE_THROWS_AS(
-                bmp.SwapChannels(0, 4)
-        , std::runtime_error
+            bmp.SwapChannels(0, 4)
+            , std::runtime_error
         );
     }
+
     return;
 }
