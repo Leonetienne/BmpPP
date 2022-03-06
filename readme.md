@@ -59,10 +59,10 @@ bmp.GetPixel(Vector2i(60, 50))[1] = 128;
 // Assuming image is RGBA
 std::uint8_t* pixel = bmp.GetPixel(Vector2i(60, 50));
 
-std::uint8_t* r = pixel[0];
-std::uint8_t* g = pixel[1];
-std::uint8_t* b = pixel[2];
-std::uint8_t* a = pixel[3];
+std::uint8_t r = pixel[0];
+std::uint8_t g = pixel[1];
+std::uint8_t b = pixel[2];
+std::uint8_t a = pixel[3];
 ```
 
 ##### Convert between RGB and RGBA
