@@ -3,7 +3,6 @@
 #include <algorithm>
 #include "BmpWriter.h"
 #include "BmpReader.h"
-#include <iostream>
 
 #define CHECK_IF_INITIALIZED if (!isInitialized) throw std::runtime_error("Image not initialized!");
 
