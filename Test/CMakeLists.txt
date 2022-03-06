@@ -25,6 +25,8 @@ add_executable(Test
         Write.cpp
         OperatorEquals.cpp
         FillChannel.cpp
+        MirrorHorizontally.cpp
+        MirrorVertically.cpp
 )
 
 # Move test images to build dir

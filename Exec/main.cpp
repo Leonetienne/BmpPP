@@ -23,12 +23,12 @@ int main() {
     bmp.Write("write.bmp");
 */
 
-    BMP bmp("test.bmp");
+    BMP bmp("basea_gradient.bmp");
 
-    //BMP newBmp = bmp.MirrorHorizontally();
-    BMP newBmp = bmp.MirrorVertically();
+    BMP newBmp = bmp.MirrorHorizontally();
+    //BMP newBmp = bmp.MirrorVertically();
 
-    if(!newBmp.Write("testwrite.bmp"))
+    if(!newBmp.Write("basea_gradient_flipped_hor.bmp"))
         std::cerr << "What the hell" << std::endl;
 
     /*
