@@ -8,6 +8,8 @@
 
 namespace Leonetienne::BmpPP {
 
+    using namespace Eule;
+
     BMP::BMP() {
         // Do nothing
         return;
@@ -20,7 +22,7 @@ namespace Leonetienne::BmpPP {
         return;
     }
 
-    BMP::BMP(const Eule::Vector2i &size, const Colormode& colormode)
+    BMP::BMP(const Vector2i &size, const Colormode& colormode)
         :
         size { size },
         colormode { colormode }
@@ -30,7 +32,7 @@ namespace Leonetienne::BmpPP {
         return;
     }
 
-    void BMP::ReInitialize(const Eule::Vector2i &size) {
+    void BMP::ReInitialize(const Vector2i &size) {
         isInitialized = true;
 
         // Carry over new attributes
@@ -47,7 +49,7 @@ namespace Leonetienne::BmpPP {
         return;
     }
 
-    void BMP::ReInitialize(const Eule::Vector2i &size, const Colormode &colormode) {
+    void BMP::ReInitialize(const Vector2i &size, const Colormode &colormode) {
         isInitialized = true;
 
         // Carry over new attributes
@@ -75,7 +77,7 @@ namespace Leonetienne::BmpPP {
         return BmpReader::Read(*this, filename);
     }
 
-    std::uint8_t *BMP::GetPixel(const Eule::Vector2i &position) {
+    std::uint8_t *BMP::GetPixel(const Vector2i &position) {
         CHECK_IF_INITIALIZED
 
         const std::size_t pixelIndex =
@@ -87,7 +89,7 @@ namespace Leonetienne::BmpPP {
         return pixelBuffer.data() + pixelIndex;
     }
 
-    const std::uint8_t *BMP::GetPixel(const Eule::Vector2i &position) const {
+    const std::uint8_t *BMP::GetPixel(const Vector2i &position) const {
         CHECK_IF_INITIALIZED
 
         const std::size_t pixelIndex =
@@ -99,7 +101,7 @@ namespace Leonetienne::BmpPP {
         return pixelBuffer.data() + pixelIndex;
     }
 
-    void BMP::SetPixel(const Eule::Vector2i &position,
+    void BMP::SetPixel(const Vector2i &position,
                        const std::uint8_t v)
     {
         CHECK_IF_INITIALIZED
@@ -113,7 +115,7 @@ namespace Leonetienne::BmpPP {
         return;
     }
 
-    void BMP::SetPixel(const Eule::Vector2i &position,
+    void BMP::SetPixel(const Vector2i &position,
                        const std::uint8_t r,
                        const std::uint8_t g,
                        const std::uint8_t b)
@@ -129,7 +131,7 @@ namespace Leonetienne::BmpPP {
         return;
     }
 
-    void BMP::SetPixel(const Eule::Vector2i &position,
+    void BMP::SetPixel(const Vector2i &position,
                   const std::uint8_t r,
                   const std::uint8_t g,
                   const std::uint8_t b,
@@ -169,7 +171,7 @@ namespace Leonetienne::BmpPP {
         return pixelBuffer.data();
     }
 
-    const Eule::Vector2i &BMP::GetDimensions() const {
+    const Vector2i &BMP::GetDimensions() const {
         CHECK_IF_INITIALIZED
 
         return size;
@@ -322,7 +324,7 @@ namespace Leonetienne::BmpPP {
         CHECK_IF_INITIALIZED
 
         // Create a new image matching this ones metadata, but with width and height flipped
-        BMP bmp(Eule::Vector2i(size.y, size.x), colormode);
+        BMP bmp(Vector2i(size.y, size.x), colormode);
 
         // Now copy over the pixels, rotating it by 90 deg
         const std::size_t numChannels = GetNumChannels();
@@ -348,7 +350,7 @@ namespace Leonetienne::BmpPP {
         CHECK_IF_INITIALIZED
 
         // Create a new image matching this ones metadata, but with width and height flipped
-        BMP bmp(Eule::Vector2i(size.y, size.x), colormode);
+        BMP bmp(Vector2i(size.y, size.x), colormode);
 
         // Now copy over the pixels, rotating it by -90 deg
         const std::size_t numChannels = GetNumChannels();
@@ -461,7 +463,7 @@ namespace Leonetienne::BmpPP {
         return;
     }
 
-    BMP BMP::Crop(const Eule::Vector2i &topleft, const Eule::Vector2i &cropSize) const {
+    BMP BMP::Crop(const Vector2i &topleft, const Vector2i &cropSize) const {
         CHECK_IF_INITIALIZED
 
         // Check that the cropping rect is within our pixel coordinates
