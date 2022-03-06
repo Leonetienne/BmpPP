@@ -49,6 +49,9 @@ bmp.SetPixel(Vector2i(60, 50), 255, 128, 128);
 
 // Set pixel rgba value
 bmp.SetPixel(Vector2i(60, 50), 255, 128, 128, 64);
+
+// Set only one specific channel (green=1) of one specific pixel
+bmp.GetPixel(Vector2i(60, 50))[1] = 128;
 ```
 
 ##### Get pixel data
