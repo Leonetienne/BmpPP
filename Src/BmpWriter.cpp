@@ -86,11 +86,12 @@ namespace Leonetienne::BmpPP {
                         break;
                 }
 
-                // Add row padding
-                // Since we have to pad to a multiple of 4, the padding will never be more than four bytes
-                for (std::size_t i = 0; i < paddingBytesPerRow; i++)
-                    packedPixels.insert(packedPixels.cend(), 0x0);
             }
+
+            // Add row padding
+            // Since we have to pad to a multiple of 4, the padding will never be more than four bytes
+            for (std::size_t i = 0; i < paddingBytesPerRow; i++)
+                packedPixels.insert(packedPixels.cend(), 0x0);
         }
 
         // Now we can finally set the fileSize field in the file header,
