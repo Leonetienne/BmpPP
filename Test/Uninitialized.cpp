@@ -5,7 +5,7 @@
 using namespace Leonetienne::BmpPP;
 using namespace Eule;
 
-// Tests that trying to interrogate any getter/Write() on an uninitialized image results in a runtime error
+// Tests that get information or modifying on an uninitialized image results in a runtime error
 TEST_CASE(__FILE__"/RuntimeErrorOnUninitialized", "[Uninitialized]")
 {
     // Create uninitialized image
@@ -43,6 +43,36 @@ TEST_CASE(__FILE__"/RuntimeErrorOnUninitialized", "[Uninitialized]")
 
     REQUIRE_THROWS_AS(
         bmp.GetPixelbufferSize()
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.GetPixelbuffer()
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.MirrorHorizontally()
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.MirrorVertically()
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.MirrorVertically()
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.SwapChannels(0, 1)
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.FillChannel(0, 0xFF)
         , std::runtime_error
     );
 
