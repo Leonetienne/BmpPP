@@ -24,6 +24,7 @@ add_executable(Test
         Read.cpp
         Write.cpp
         OperatorEquals.cpp
+        FillChannel.cpp
 )
 
 # Move test images to build dir
