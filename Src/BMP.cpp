@@ -293,6 +293,93 @@ namespace Leonetienne::BmpPP {
         return bmp;
     }
 
+    BMP BMP::Rotate90degClockwise() const {
+        CHECK_IF_INITIALIZED
+
+        // Create a new image matching this ones metadata, but with width and height flipped
+        BMP bmp(Eule::Vector2i(size.y, size.x), colormode);
+
+        // Now copy over the pixels, rotating it by 90 deg
+        const std::size_t numChannels = GetNumChannels();
+        for (std::size_t y = 0; y < size.y; y++) {
+            for (std::size_t x = 0; x < size.x; x++) {
+                const std::size_t pixelIndex = (y * size.x + x) * numChannels;
+                const std::size_t rotatedPixelIndex = (x * size.y + (size.y - 1 - y)) * numChannels;
+
+                // Copy over the whole pixel
+                std::copy(
+                    pixelBuffer.cbegin() + pixelIndex,
+                    pixelBuffer.cbegin() + pixelIndex + numChannels,
+                    bmp.pixelBuffer.begin() + rotatedPixelIndex
+                );
+            }
+        }
+
+        // return it
+        return bmp;
+    }
+
+    BMP BMP::Rotate90degCounterclockwise() const {
+        CHECK_IF_INITIALIZED
+
+        // Create a new image matching this ones metadata, but with width and height flipped
+        BMP bmp(Eule::Vector2i(size.y, size.x), colormode);
+
+        // Now copy over the pixels, rotating it by -90 deg
+        const std::size_t numChannels = GetNumChannels();
+        for (std::size_t y = 0; y < size.y; y++) {
+            for (std::size_t x = 0; x < size.x; x++) {
+                const std::size_t pixelIndex = (y * size.x + x) * numChannels;
+                const std::size_t rotatedPixelIndex = ((size.x - 1 - x) * size.y + y) * numChannels;
+
+                // Copy over the whole pixel
+                std::copy(
+                    pixelBuffer.cbegin() + pixelIndex,
+                    pixelBuffer.cbegin() + pixelIndex + numChannels,
+                    bmp.pixelBuffer.begin() + rotatedPixelIndex
+                );
+            }
+        }
+
+        // return it
+        return bmp;
+    }
+
+    BMP BMP::Rotate180deg() const {
+        CHECK_IF_INITIALIZED
+
+        // Basically, what we're doing here, is mirroring
+        // the image horizontally and vertically at the same time
+
+        // Create a new image matching this's metadata
+        BMP bmp(size, colormode);
+
+        // Now copy over the pixels, mirroring it horizontally and vertically
+        const std::size_t numChannels = GetNumChannels();
+        const std::size_t rowLength = size.x * numChannels;
+
+        for (std::size_t y = 0; y < size.y; y++) {
+            const std::size_t rowIndex = y * rowLength;
+            const std::size_t flippedRowIndex = (size.y - 1 - y) * rowLength;
+
+            for (std::size_t x = 0; x < size.x; x++) {
+                const std::size_t pixelIndex = rowIndex + x * numChannels;
+                const std::size_t rotatedPixelIndex = flippedRowIndex + (size.x - 1 - x) * numChannels;
+
+                // Copy over the whole pixel
+                std::copy(
+                        pixelBuffer.cbegin() + pixelIndex,
+                        pixelBuffer.cbegin() + pixelIndex + numChannels,
+                        bmp.pixelBuffer.begin() + rotatedPixelIndex
+                );
+            }
+
+        }
+
+        // return it
+        return bmp;
+    }
+
 }
 
 #undef CHECK_IF_INITIALIZED

@@ -28,6 +28,7 @@ add_executable(Test
         MirrorHorizontally.cpp
         MirrorVertically.cpp
         SwapChannels.cpp
+        Rotate.cpp
 )
 
 # Move test images to build dir
