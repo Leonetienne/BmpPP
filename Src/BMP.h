@@ -13,7 +13,7 @@ namespace Leonetienne::BmpPP {
 
     class BMP {
     public:
-        // Will create an uninitialized image
+        //! Will create an uninitialized image
         BMP();
 
         //! Will create an image with the entire pixel buffer set to 0
@@ -23,10 +23,10 @@ namespace Leonetienne::BmpPP {
         explicit BMP(const std::string& filename);
 
         //! Will return a pointer to the first byte of a pixel at a given position
-        std::uint8_t* GetPixel(const Eule::Vector2i& position);
+        [[nodiscard]] std::uint8_t* GetPixel(const Eule::Vector2i& position);
 
         //! Will return a pointer to the first byte of a pixel at a given position
-        const std::uint8_t* GetPixel(const Eule::Vector2i& position) const;
+        [[nodiscard]] const std::uint8_t* GetPixel(const Eule::Vector2i& position) const;
 
         //! Will set the color of a pixel at a given position
         void SetPixel(const Eule::Vector2i& position, const std::uint8_t r, const std::uint8_t g, const std::uint8_t b, const std::uint8_t a = 0xFF);
@@ -38,25 +38,25 @@ namespace Leonetienne::BmpPP {
         void ReInitialize(const Eule::Vector2i& size, const Colormode& colormode);
 
         //! Will return a pointer to the raw pixel data
-        std::uint8_t* data();
+        [[nodiscard]] std::uint8_t* data();
 
         //! Will return a pointer to the raw pixel data
-        const std::uint8_t* data() const;
+        [[nodiscard]] const std::uint8_t* data() const;
 
         //! Will return the dimensions of the image
-        const Eule::Vector2i& GetDimensions() const;
+        [[nodiscard]] const Eule::Vector2i& GetDimensions() const;
 
         //! Will return the color mode of the image
-        const Colormode& GetColormode() const;
+        [[nodiscard]] const Colormode& GetColormode() const;
 
         //! Will return the amount of color channels used
-        std::size_t GetNumColorChannels() const;
+        [[nodiscard]] std::size_t GetNumColorChannels() const;
 
         //! Will return the size of the raw pixel buffer, in bytes
-        std::size_t GetPixelbufferSize() const;
+        [[nodiscard]] std::size_t GetPixelbufferSize() const;
 
         //! Will return whether this image is initialized or not
-        bool IsInitialized() const;
+        [[nodiscard]] bool IsInitialized() const;
 
         //! Will write the bmp image to a file.
         //! Returns false, if unable to open the file
@@ -65,6 +65,27 @@ namespace Leonetienne::BmpPP {
         //! Will read a bmp image from a file.
         //! Returns false, if unable to open, or parse, file
         bool Read(const std::string& filename);
+
+        //! Will mirror the image horizontally
+        void MirrorHorizontally();
+
+        //! Will mirror the image vertically
+        void MirrorVertically();
+
+        //! Will rotate the image by 90deg, clockwise
+        void Rotate90degClockwise();
+
+        //! Will rotate the image by 90deg, counterclockwise
+        void Rotate90degCounterclockwise();
+
+        //! Will rotate the image by 180deg
+        void Rotate180deg();
+
+        //! Will convert the images colormode
+        void ConvertColormode(const Colormode& colormode);
+
+        //! Will swap two channels. Useful for, for example, easy BGR to RGB conversion.
+        void SwapChannels(const std::size_t& channel1, const std::size_t& channel2);
 
     private:
         Eule::Vector2i size;

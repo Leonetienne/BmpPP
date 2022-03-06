@@ -1,0 +1,2 @@
+- Implement utility methods in BMP.h
+- Tests for read/write, and the utility methods
