@@ -107,7 +107,7 @@ namespace Leonetienne::BmpPP {
         void SwapChannels(const std::size_t& channel1, const std::size_t& channel2);
 
         //! Will copy the specified rectangle-area, and return it as a new image
-        BMP Crop(const Eule::Rect& area) const;
+        BMP Crop(const Eule::Vector2i& topleft, const Eule::Vector2i& size) const;
 
         //! Will fill a specific channel with a value
         void FillChannel(const std::size_t& channel, const std::uint8_t value);

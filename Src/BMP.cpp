@@ -466,6 +466,47 @@ namespace Leonetienne::BmpPP {
 
         return;
     }
+
+    BMP BMP::Crop(const Eule::Vector2i &topleft, const Eule::Vector2i &cropSize) const {
+        CHECK_IF_INITIALIZED
+
+        // Check that the cropping rect is within our pixel coordinates
+        if (
+            (topleft.x < 0) || (topleft.y < 0) ||
+            (topleft.x + cropSize.x > size.x) || (topleft.y + cropSize.y > size.y)
+        )
+            throw std::runtime_error("Rect coordinates are not contained inside image!");
+
+        // Check that the area of the cropping rect is > 0
+        if (cropSize.x * cropSize.y == 0)
+            throw std::runtime_error("Cropping area is 0!");
+
+        ///////////////////
+        // Enough checks...
+
+        // Create a new image of the rects size, and our color mode
+        BMP bmp(cropSize, colormode);
+
+        // Now copy over our pixel data
+        const std::size_t numChannels = GetNumChannels();
+        const std::size_t sourceRowLength = size.x * numChannels;
+        const std::size_t targetRowLength = bmp.GetDimensions().x * numChannels;
+
+        for (std::size_t y = topleft.y; y < topleft.y + cropSize.y; y++) {
+            const std::size_t sourceRowIndex = y * sourceRowLength;
+            const std::size_t targetRowIndex = (y - topleft.y) * targetRowLength;
+
+            // Now just copy over this entire row(segment)
+            std::copy(
+                pixelBuffer.cbegin() + sourceRowIndex + topleft.x * numChannels,
+                pixelBuffer.cbegin() + sourceRowIndex + (topleft.x * numChannels) + targetRowLength,
+                bmp.pixelBuffer.begin() + targetRowIndex
+            );
+        }
+
+        // Done.
+        return bmp;
+    }
 }
 
 #undef CHECK_IF_INITIALIZED

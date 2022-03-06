@@ -30,6 +30,7 @@ add_executable(Test
         SwapChannels.cpp
         Rotate.cpp
         ConvertColormode.cpp
+        Crop.cpp
 )
 
 # Move test images to build dir
