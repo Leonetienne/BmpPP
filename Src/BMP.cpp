@@ -206,11 +206,6 @@ namespace Leonetienne::BmpPP {
         return isInitialized;
     }
 
-    std::vector<std::uint8_t> &BMP::GetPixelbuffer() {
-        CHECK_IF_INITIALIZED
-        return pixelBuffer;
-    }
-
     const std::vector<std::uint8_t> &BMP::GetPixelbuffer() const {
         CHECK_IF_INITIALIZED
         return pixelBuffer;
