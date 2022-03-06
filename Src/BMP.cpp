@@ -1,5 +1,6 @@
 #include "BMP.h"
 #include <stdexcept>
+#include <algorithm>
 #include "BmpWriter.h"
 #include "BmpReader.h"
 
@@ -175,7 +176,21 @@ namespace Leonetienne::BmpPP {
         return isInitialized;
     }
 
+    std::vector<std::uint8_t> &BMP::GetPixelbuffer() {
+        CHECK_IF_INITIALIZED
+        return pixelBuffer;
+    }
+
+    const std::vector<std::uint8_t> &BMP::GetPixelbuffer() const {
+        CHECK_IF_INITIALIZED
+        return pixelBuffer;
+    }
+
     bool BMP::operator==(const BMP &other) const {
+        // Check initialization status
+        if (isInitialized != other.isInitialized)
+            return false;
+
         // Check metadata
         if (colormode != other.colormode)
             return false;
@@ -195,6 +210,11 @@ namespace Leonetienne::BmpPP {
     }
 
     void BMP::FillChannel(const size_t &channel, const std::uint8_t value) {
+        CHECK_IF_INITIALIZED
+
+        if (GetNumChannels() <= channel)
+            throw std::runtime_error("Channel index out of range!");
+
         const std::size_t numChannels = GetNumChannels();
 
         for (std::size_t i = 0; i < pixelBuffer.size(); i += numChannels)
@@ -203,15 +223,23 @@ namespace Leonetienne::BmpPP {
         return;
     }
 
-    std::vector<std::uint8_t> &BMP::GetPixelbuffer() {
-        return pixelBuffer;
-    }
+    void BMP::SwapChannels(const size_t &channel1, const size_t &channel2) {
+        CHECK_IF_INITIALIZED
 
-    const std::vector<std::uint8_t> &BMP::GetPixelbuffer() const {
-        return pixelBuffer;
+        if ((GetNumChannels() <= channel1) || (GetNumChannels() <= channel2))
+            throw std::runtime_error("Channel index out of range!");
+
+        const std::size_t numChannels = GetNumChannels();
+
+        for (std::size_t i = 0; i < pixelBuffer.size(); i += numChannels)
+            std::swap(pixelBuffer[i + channel1], pixelBuffer[i + channel2]);
+
+        return;
     }
 
     BMP BMP::MirrorHorizontally() const {
+        CHECK_IF_INITIALIZED
+
         // Create a new image matching this's metadata
         BMP bmp(size, colormode);
 
@@ -239,6 +267,8 @@ namespace Leonetienne::BmpPP {
     }
 
     BMP BMP::MirrorVertically() const {
+        CHECK_IF_INITIALIZED
+
         // Create a new image matching this's metadata
         BMP bmp(size, colormode);
 
