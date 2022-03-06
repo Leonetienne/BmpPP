@@ -6,7 +6,7 @@ using namespace Leonetienne::BmpPP;
 using namespace Eule;
 
 // Tests that rotating works
-TEST_CASE(__FILE__"/Mirroring produces the correct results", "[Rotate]")
+TEST_CASE(__FILE__"/Mirroring_produces_the_correct_results", "[Rotate]")
 {
     SECTION("90deg clockwise") {
         // Read an image
