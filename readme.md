@@ -128,7 +128,7 @@ bmp.SwapChannels(0, 2);
 const std::vector<std::uint8_t> yourPixelbuffer;
 
 // Create a BMP instance with your resolution, and color mode
-BMP bmp(Vector2i(img_height, img_width), Colormode::RGBA);
+BMP bmp(Vector2i(img_width, img_height), Colormode::RGBA);
 
 // Quick safety check, that the pixel buffer sizes do indeed match
 if (yourPixelbuffer.size() != bmp.GetPixelbufferSize())
