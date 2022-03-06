@@ -29,6 +29,7 @@ add_executable(Test
         MirrorVertically.cpp
         SwapChannels.cpp
         Rotate.cpp
+        ConvertColormode.cpp
 )
 
 # Move test images to build dir

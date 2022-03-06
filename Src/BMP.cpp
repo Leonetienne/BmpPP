@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "BmpWriter.h"
 #include "BmpReader.h"
+#include <iostream>
 
 #define CHECK_IF_INITIALIZED if (!isInitialized) throw std::runtime_error("Image not initialized!");
 
@@ -97,6 +98,36 @@ namespace Leonetienne::BmpPP {
             throw std::runtime_error("Pixel index out of range!");
 
         return pixelBuffer.data() + pixelIndex;
+    }
+
+    void BMP::SetPixel(const Eule::Vector2i &position,
+                       const std::uint8_t v)
+    {
+        CHECK_IF_INITIALIZED
+
+        std::uint8_t* pixel = GetPixel(position);
+
+        pixel[0] = v;
+        pixel[1] = v;
+        pixel[2] = v;
+
+        return;
+    }
+
+    void BMP::SetPixel(const Eule::Vector2i &position,
+                       const std::uint8_t r,
+                       const std::uint8_t g,
+                       const std::uint8_t b)
+    {
+        CHECK_IF_INITIALIZED
+
+        std::uint8_t* pixel = GetPixel(position);
+
+        pixel[0] = r;
+        pixel[1] = g;
+        pixel[2] = b;
+
+        return;
     }
 
     void BMP::SetPixel(const Eule::Vector2i &position,
@@ -380,6 +411,61 @@ namespace Leonetienne::BmpPP {
         return bmp;
     }
 
+    void BMP::ConvertColormode(const Colormode &colormode) {
+        CHECK_IF_INITIALIZED
+
+        // Do we already have the target color mode?
+        if (this->colormode == colormode)
+            return;
+
+        // So, we actually have to do something. Darn it.
+        // Move the old pixel buffer into a a.. well.. buffer. We're gonna need it
+        const std::vector<std::uint8_t> oldPixelBuffer = std::move(pixelBuffer);
+
+        // Re-initialize our image with our new color mode
+        ReInitialize(size, colormode);
+
+        // What should we convert then?
+        switch (colormode) { // this is the PARAMETER!
+            // Convert RGBA to RGB.
+            // Just drop the alpha channel.
+            case Colormode::RGB: {
+                // Jump through the old pixel buffer, four bytes at a time
+                for (std::size_t i = 0; i < oldPixelBuffer.size(); i += 4) {
+                    // Per jump, copy three bytes into the new one. These are r,g,b.
+                    std::copy(
+                        oldPixelBuffer.cbegin() + i,
+                        oldPixelBuffer.cbegin() + i + 3,
+                        pixelBuffer.begin() + i - (i/4) // Subtract one byte per pixel, because the new pixelBuffer is RGB, not RGBA.
+                    );
+                }
+
+                // Done.
+            }
+            return;
+
+            // Convert RGB to RGBA.
+            // Just fill the new alpha channel with 0xFF.
+            case Colormode::RGBA: {
+                // Jump through the old pixel buffer, three bytes at a time
+                for (std::size_t i = 0; i < oldPixelBuffer.size(); i += 3) {
+                    // Per jump, copy these three bytes into the new one. These are r,g,b.
+                    std::copy(
+                            oldPixelBuffer.cbegin() + i,
+                            oldPixelBuffer.cbegin() + i + 3,
+                            pixelBuffer.begin() + i + (i/3) // Add one byte per pixel, because the new pixelBuffer is RGBA, not RGB.
+                    );
+                }
+
+                // The alpha channel should already be set to 0xFF, by ReInitialize().
+
+                // Done.
+            }
+            break;
+        }
+
+        return;
+    }
 }
 
 #undef CHECK_IF_INITIALIZED
