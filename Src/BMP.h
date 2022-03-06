@@ -79,10 +79,10 @@ namespace Leonetienne::BmpPP {
         //! Will compare two images for not being exactly identical regarding resolution, bit depth, and pixel values.
         bool operator!=(const BMP& other) const;
 
-        //! Will mirror the image horizontally, and return it as a new image
+        //! Will mirror the image horizontally (flips x axis), and return it as a new image
         BMP MirrorHorizontally() const;
 
-        //! Will mirror the image vertically, and return it as a new image
+        //! Will mirror the image vertically (flips y axis), and return it as a new image
         BMP MirrorVertically() const;
 
         //! Will rotate the image by 90deg, clockwise, and return it as a new image

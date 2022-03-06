@@ -6,7 +6,7 @@ using namespace Leonetienne::BmpPP;
 
 int main() {
 
-
+/*
     BMP bmp({800, 600}, Colormode::RGB);
 
     for (int x = 0; x < 800; x++)
@@ -21,6 +21,15 @@ int main() {
     }
 
     bmp.Write("write.bmp");
+*/
+
+    BMP bmp("test.bmp");
+
+    //BMP newBmp = bmp.MirrorHorizontally();
+    BMP newBmp = bmp.MirrorVertically();
+
+    if(!newBmp.Write("testwrite.bmp"))
+        std::cerr << "What the hell" << std::endl;
 
     /*
 

@@ -211,6 +211,58 @@ namespace Leonetienne::BmpPP {
         return pixelBuffer;
     }
 
+    BMP BMP::MirrorHorizontally() const {
+        // Create a new image matching this's metadata
+        BMP bmp(size, colormode);
+
+        // Now copy over the pixels, mirroring it horizontally
+        const std::size_t numChannels = GetNumChannels();
+        for (std::size_t y = 0; y < size.y; y++) {
+            const std::size_t rowIndex = y * size.x * numChannels;
+
+            for (std::size_t x = 0; x < size.x; x++) {
+                const std::size_t pixelIndex = rowIndex + x * numChannels;
+                const std::size_t flippedPixelIndex = rowIndex + (size.x - 1 - x) * numChannels;
+
+                // Copy over the whole pixel
+                std::copy(
+                  pixelBuffer.cbegin() + flippedPixelIndex,
+                  pixelBuffer.cbegin() + flippedPixelIndex + numChannels,
+                  bmp.pixelBuffer.begin() + pixelIndex
+                );
+            }
+
+        }
+
+        // return it
+        return bmp;
+    }
+
+    BMP BMP::MirrorVertically() const {
+        // Create a new image matching this's metadata
+        BMP bmp(size, colormode);
+
+        const std::size_t numChannels = GetNumChannels();
+        const std::size_t rowLength = size.x * numChannels;
+
+        // Now iterate over all rows, and copy them over, mirroring it vertically
+        for (std::size_t y = 0; y < size.y; y++) {
+            const std::size_t rowIndex = y * rowLength;
+            const std::size_t flippedRowIndex = (size.y - 1 - y) * rowLength;
+
+            // Copy over the whole row
+            std::copy(
+                pixelBuffer.cbegin() + flippedRowIndex,
+                pixelBuffer.cbegin() + flippedRowIndex + rowLength,
+                bmp.pixelBuffer.begin() + rowIndex
+            );
+
+        }
+
+        // return it
+        return bmp;
+    }
+
 }
 
 #undef CHECK_IF_INITIALIZED
