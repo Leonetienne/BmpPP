@@ -10,13 +10,13 @@ TEST_CASE(__FILE__"/Mirroring produces the correct results", "[Mirroring][Mirror
 {
     SECTION("RGB") {
         // Read a gradient image
-        BMP bmp("base_gradient.bmp");
+        BMP bmp("base_fuwadera2.bmp");
 
         // Mirror it
         bmp = bmp.MirrorVertically();
 
         // Read reference image
-        const BMP reference("base_gradient_flipped_ver.bmp");
+        const BMP reference("base_fuwadera2_mirror_ver.bmp");
 
         // Assert that they are equal
         REQUIRE(bmp == reference);
@@ -24,13 +24,13 @@ TEST_CASE(__FILE__"/Mirroring produces the correct results", "[Mirroring][Mirror
 
     SECTION("RGBA") {
         // Read a gradient image
-        BMP bmp("basea_gradient.bmp");
+        BMP bmp("basea_fuwadera2.bmp");
 
         // Mirror it
         bmp = bmp.MirrorVertically();
 
         // Read reference image
-        const BMP reference("basea_gradient_flipped_ver.bmp");
+        const BMP reference("basea_fuwadera2_mirror_ver.bmp");
 
         // Assert that they are equal
         REQUIRE(bmp == reference);
