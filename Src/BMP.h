@@ -44,6 +44,12 @@ namespace Leonetienne::BmpPP {
         //! Will return a pointer to the raw pixel data
         [[nodiscard]] const std::uint8_t* data() const;
 
+        //! Will return the actual vector containing the raw pixel data
+        [[nodiscard]] std::vector<std::uint8_t>& GetPixelbuffer();
+
+        //! Will return the actual vector containing the raw pixel data
+        [[nodiscard]] const std::vector<std::uint8_t>& GetPixelbuffer() const;
+
         //! Will return the dimensions of the image
         [[nodiscard]] const Eule::Vector2i& GetDimensions() const;
 
