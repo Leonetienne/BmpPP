@@ -2,7 +2,6 @@
 #define BMPPP_BMP_H
 
 #include <Eule/Vector2.h>
-#include <Eule/Rect.h>
 #include <vector>
 #include <cstdint>
 #include "Colormodes.h"
