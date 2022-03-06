@@ -115,15 +115,17 @@ bmp.FillChannel(3, 255);
 ```c++
 // Convert BGR to RGB, by swapping the red and blue channels.
 bmp.SwapChannels(0, 2);
+
+// Obviously: red->0, green->1, blue->2, alpha->3
 ```
 
-##### Feed in existing pixel buffer
+##### Feed in an existing pixel buffer
 ```c++
 // OK, this is a bit more complex, but here's how to do it
 
 // This is assumed to be an RGBA pixel buffer, formatted like:
 // RGBARGBARGBARGBARGBARGBARGBA, with pixels in the same row lying next to each other in memory.
-std::vector<std::uint8_t> yourPixelbuffer;
+const std::vector<std::uint8_t> yourPixelbuffer;
 
 // Create a BMP instance with your resolution, and color mode
 BMP bmp(Vector2i(img_height, img_width), Colormode::RGBA);
