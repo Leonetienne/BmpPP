@@ -29,8 +29,14 @@ namespace Leonetienne::BmpPP {
         //! Will return a pointer to the first byte of a pixel at a given position
         [[nodiscard]] const std::uint8_t* GetPixel(const Eule::Vector2i& position) const;
 
-        //! Will set the color of a pixel at a given position
-        void SetPixel(const Eule::Vector2i& position, const std::uint8_t r, const std::uint8_t g, const std::uint8_t b, const std::uint8_t a = 0xFF);
+        //! Will set the grayscale value of a pixel at a given position. Takes a v value.
+        void SetPixel(const Eule::Vector2i& position, const std::uint8_t v);
+
+        //! Will set the color of a pixel at a given position. Takes r, g, b values.
+        void SetPixel(const Eule::Vector2i& position, const std::uint8_t r, const std::uint8_t g, const std::uint8_t b);
+
+        //! Will set the color and opacity of a pixel at a given position. Takes r, g, b, a values.
+        void SetPixel(const Eule::Vector2i& position, const std::uint8_t r, const std::uint8_t g, const std::uint8_t b, const std::uint8_t a);
 
         //! Will basically reconstruct this image, to fit a new resolution
         void ReInitialize(const Eule::Vector2i& size);
