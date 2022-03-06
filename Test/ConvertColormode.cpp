@@ -3,7 +3,7 @@
 #include "Catch2.h"
 
 using namespace Leonetienne::BmpPP;
-using namespace Eule;
+using namespace Leonetienne::Eule;
 
 // Tests converting between color modes works
 TEST_CASE(__FILE__"/Converting_between_color_modes_works", "[Conversion]")

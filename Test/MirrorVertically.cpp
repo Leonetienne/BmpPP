@@ -3,7 +3,7 @@
 #include "Catch2.h"
 
 using namespace Leonetienne::BmpPP;
-using namespace Eule;
+using namespace Leonetienne::Eule;
 
 // Tests the mirror vertical function against reference images
 TEST_CASE(__FILE__"/Mirroring produces the correct results", "[Mirroring][MirrorVertically]")

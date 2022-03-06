@@ -3,7 +3,7 @@
 #include "Catch2.h"
 
 using namespace Leonetienne::BmpPP;
-using namespace Eule;
+using namespace Leonetienne::Eule;
 
 // Tests that cropping produces the correct result
 TEST_CASE(__FILE__"/HappyPath", "[Cropping]")

@@ -4,7 +4,7 @@
 #include <Eule/Math.h>
 
 using namespace Leonetienne::BmpPP;
-using namespace Eule;
+using namespace Leonetienne::Eule;
 
 #define IMSIZE Vector2i(800, 600)
 

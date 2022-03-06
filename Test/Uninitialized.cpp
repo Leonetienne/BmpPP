@@ -3,7 +3,7 @@
 #include "Catch2.h"
 
 using namespace Leonetienne::BmpPP;
-using namespace Eule;
+using namespace Leonetienne::Eule;
 
 // Tests that get information or modifying on an uninitialized image results in a runtime error
 TEST_CASE(__FILE__"/RuntimeErrorOnUninitialized", "[Uninitialized]")

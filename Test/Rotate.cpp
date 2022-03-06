@@ -3,7 +3,7 @@
 #include "Catch2.h"
 
 using namespace Leonetienne::BmpPP;
-using namespace Eule;
+using namespace Leonetienne::Eule;
 
 // Tests that rotating works
 TEST_CASE(__FILE__"/Rotating_produces_the_correct_results", "[Rotate]")

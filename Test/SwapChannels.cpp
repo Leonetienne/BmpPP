@@ -3,7 +3,7 @@
 #include "Catch2.h"
 
 using namespace Leonetienne::BmpPP;
-using namespace Eule;
+using namespace Leonetienne::Eule;
 
 // Tests that swapping channels works
 TEST_CASE(__FILE__"/SwappingChannelsWorks", "[SwapChannels]")
