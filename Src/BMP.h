@@ -2,6 +2,7 @@
 #define BMPPP_BMP_H
 
 #include <Eule/Vector2.h>
+#include <Eule/Rect.h>
 #include <vector>
 #include <cstdint>
 #include "Colormodes.h"
@@ -86,6 +87,9 @@ namespace Leonetienne::BmpPP {
 
         //! Will swap two channels. Useful for, for example, easy BGR to RGB conversion.
         void SwapChannels(const std::size_t& channel1, const std::size_t& channel2);
+
+        //! Will copy the specified rectangle-area, and return it as a new image
+        BMP Crop(const Eule::Rect& area);
 
     private:
         Eule::Vector2i size;

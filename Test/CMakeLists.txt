@@ -21,4 +21,12 @@ add_executable(Test
         BmpHeader.cpp
         ReInitialize.cpp
         Uninitialized.cpp
+        Read.cpp
+)
+
+# Move test images to build dir
+ADD_CUSTOM_COMMAND(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/TestAssets/ $<TARGET_FILE_DIR:${PROJECT_NAME}>
 )

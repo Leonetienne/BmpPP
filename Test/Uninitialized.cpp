@@ -3,6 +3,7 @@
 #include "Catch2.h"
 
 using namespace Leonetienne::BmpPP;
+using namespace Eule;
 
 // Tests that trying to interrogate any getter/Write() on an uninitialized image results in a runtime error
 TEST_CASE(__FILE__"/RuntimeErrorOnUninitialized", "[Uninitialized]")
@@ -65,7 +66,7 @@ TEST_CASE(__FILE__"/UninitializedImageIsUninitialized", "[Uninitialized]")
 // Tests that an image constructed via dimensions is initialized
 TEST_CASE(__FILE__"/ConstructedByDimensionsIsInitialized", "[Uninitialized]")
 {
-    BMP bmp({800, 600});
+    BMP bmp(Vector2i(800, 600));
     REQUIRE(bmp.IsInitialized());
 
     return;
