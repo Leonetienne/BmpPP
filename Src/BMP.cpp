@@ -12,7 +12,6 @@ namespace Leonetienne::BmpPP {
         return;
     }
 
-
     BMP::BMP(const std::string &filename) {
         if(!Read(filename))
             throw std::runtime_error("Unable to read bmp image!");

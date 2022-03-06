@@ -48,8 +48,8 @@ namespace Leonetienne::BmpPP {
         std::uint32_t height;
         std::uint16_t bitsPerPixel;
 
-        // Check if what kind of dib header we're dealing with
-        // These are the two we're supporting (to read, at least).
+        // Check for what kind of dib header we're dealing with.
+        // Is it a BITMAPCOREHEADER or a variant of a BITMAPINFOHEADER?
         if (dibHeaderSize == 12) {
             // BITMAPCOREHEADER it is
 
@@ -68,27 +68,14 @@ namespace Leonetienne::BmpPP {
             // Read the bits per pixel
             ReadBytes(ifs, bitsPerPixel);
         }
-        else if (dibHeaderSize == 40) {
-            // BITMAPINFOHEADER it is
-
-            // Read the width and height (both 4-byte signed ints)
-            std::int32_t width_4byte_signed;
-            std::int32_t height_4byte_signed;
-
-            ReadBytes(ifs, width_4byte_signed);
-            ReadBytes(ifs, height_4byte_signed);
-
-            width = width_4byte_signed;
-            height = height_4byte_signed;
-
-            // Skip two useless bytes
-            ifs.ignore(2);
-
-            // Read the bits per pixel value
-            ReadBytes(ifs, bitsPerPixel);
-        }
-        else if (dibHeaderSize == 124) {
-            // BITMAPV5HEADER it is
+        else if (
+                (dibHeaderSize == 40) ||
+                (dibHeaderSize == 52) ||
+                (dibHeaderSize == 56) ||
+                (dibHeaderSize == 124) ||
+                (dibHeaderSize == 108)
+                ) {
+            // This routine should work for all the variants of BITMAPINFOHEADERs
 
             // Read the width and height
             ReadBytes(ifs, width);
@@ -133,9 +120,6 @@ namespace Leonetienne::BmpPP {
 
         // Calculate how much padding there should be between each row
         const std::size_t paddingBytesPerRow = (4 - ((width * numChannels) % 4)) % 4;
-
-        // Calculate how long bytes we should care about per row (so, excluding padding)
-        const std::size_t rowWidth = width * numChannels;
 
         // Create the pixel buffer
         std::vector<std::uint8_t> pixelArray;
