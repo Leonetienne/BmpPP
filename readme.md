@@ -10,7 +10,7 @@ Disclaimer!!:
 *Assuming:
 ```c++
 using namespace Leonetienne::BmpPP;
-using namespace Eule;
+using namespace Leonetienne::Eule;
 ```
 
 ##### Read image
