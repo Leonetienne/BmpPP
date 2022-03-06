@@ -22,6 +22,8 @@ add_executable(Test
         ReInitialize.cpp
         Uninitialized.cpp
         Read.cpp
+        Write.cpp
+        OperatorEquals.cpp
 )
 
 # Move test images to build dir

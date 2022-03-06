@@ -37,7 +37,11 @@ namespace Leonetienne::BmpPP {
 
         // Re-initialize the pixelbuffer
         pixelBuffer.clear();
-        pixelBuffer.resize(size.x * size.y * GetNumColorChannels());
+        pixelBuffer.resize(size.x * size.y * GetNumChannels());
+
+        // If we're initializing with an alpha channel, set it to 255
+        if (colormode == Colormode::RGBA)
+            FillChannel(3, 255);
 
         return;
     }
@@ -51,7 +55,11 @@ namespace Leonetienne::BmpPP {
 
         // Re-initialize the pixelbuffer
         pixelBuffer.clear();
-        pixelBuffer.resize(size.x * size.y * GetNumColorChannels());
+        pixelBuffer.resize(size.x * size.y * GetNumChannels());
+
+        // If we're initializing with an alpha channel, set it to 255
+        if (colormode == Colormode::RGBA)
+            FillChannel(3, 255);
 
         return;
     }
@@ -70,7 +78,7 @@ namespace Leonetienne::BmpPP {
         CHECK_IF_INITIALIZED
 
         const std::size_t pixelIndex =
-                (position.y * size.x + position.x) * GetNumColorChannels();
+                (position.y * size.x + position.x) * GetNumChannels();
 
         if (pixelIndex >= pixelBuffer.size())
             throw std::runtime_error("Pixel index out of range!");
@@ -82,7 +90,7 @@ namespace Leonetienne::BmpPP {
         CHECK_IF_INITIALIZED
 
         const std::size_t pixelIndex =
-                (position.y * size.x + position.x) * GetNumColorChannels();
+                (position.y * size.x + position.x) * GetNumChannels();
 
         if (pixelIndex >= pixelBuffer.size())
             throw std::runtime_error("Pixel index out of range!");
@@ -142,7 +150,7 @@ namespace Leonetienne::BmpPP {
         return colormode;
     }
 
-    std::size_t BMP::GetNumColorChannels() const {
+    std::size_t BMP::GetNumChannels() const {
         CHECK_IF_INITIALIZED
 
         switch (colormode) {
@@ -165,6 +173,34 @@ namespace Leonetienne::BmpPP {
 
     bool BMP::IsInitialized() const {
         return isInitialized;
+    }
+
+    bool BMP::operator==(const BMP &other) const {
+        // Check metadata
+        if (colormode != other.colormode)
+            return false;
+
+        if (size != other.size)
+            return false;
+
+        // Check pixel values
+        if (pixelBuffer != other.pixelBuffer)
+            return false;
+
+        return true;
+    }
+
+    bool BMP::operator!=(const BMP &other) const {
+        return !operator==(other);
+    }
+
+    void BMP::FillChannel(const size_t &channel, const std::uint8_t value) {
+        const std::size_t numChannels = GetNumChannels();
+
+        for (std::size_t i = 0; i < pixelBuffer.size(); i += numChannels)
+            pixelBuffer[i + channel] = value;
+
+        return;
     }
 
 }

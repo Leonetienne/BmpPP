@@ -37,7 +37,7 @@ TEST_CASE(__FILE__"/RuntimeErrorOnUninitialized", "[Uninitialized]")
     );
 
     REQUIRE_THROWS_AS(
-        bmp.GetNumColorChannels()
+        bmp.GetNumChannels()
         , std::runtime_error
     );
 

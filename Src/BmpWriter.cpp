@@ -21,7 +21,7 @@ namespace Leonetienne::BmpPP {
         // Populate dib header
         bmpHeader.dibHeader.imageWidth = image.size.x;
         bmpHeader.dibHeader.imageHeight = image.size.y;
-        bmpHeader.dibHeader.numBitsPerPixel = image.GetNumColorChannels() * 8;
+        bmpHeader.dibHeader.numBitsPerPixel = image.GetNumChannels() * 8;
         // The size of the pixel array is not known yet (because rows require to be padded)
 
 
@@ -30,7 +30,7 @@ namespace Leonetienne::BmpPP {
         packedPixels.reserve(image.pixelBuffer.size());
 
         // How many channels do we have?
-        const std::size_t numChannels = image.GetNumColorChannels();
+        const std::size_t numChannels = image.GetNumChannels();
 
         // Calculate how many padding bytes to add per row
         const std::size_t paddingBytesPerRow = (4 - ((image.size.x * numChannels) % 4)) % 4;

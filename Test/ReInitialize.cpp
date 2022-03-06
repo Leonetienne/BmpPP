@@ -12,7 +12,7 @@ TEST_CASE(__FILE__"/ReInitialize", "[ReInitialize]")
     SECTION("Check that the initial values are OK") {
         REQUIRE(bmp.GetDimensions().x == 800);
         REQUIRE(bmp.GetDimensions().y == 600);
-        REQUIRE(bmp.GetNumColorChannels() == 4);
+        REQUIRE(bmp.GetNumChannels() == 4);
         REQUIRE(bmp.GetColormode() == Colormode::RGBA);
         REQUIRE(bmp.GetPixelbufferSize() == 800*600*4);
     }
@@ -23,7 +23,7 @@ TEST_CASE(__FILE__"/ReInitialize", "[ReInitialize]")
     SECTION("Check that getters now return the updated values") {
         REQUIRE(bmp.GetDimensions().x == 1920);
         REQUIRE(bmp.GetDimensions().y == 1080);
-        REQUIRE(bmp.GetNumColorChannels() == 3);
+        REQUIRE(bmp.GetNumChannels() == 3);
         REQUIRE(bmp.GetColormode() == Colormode::RGB);
         REQUIRE(bmp.GetPixelbufferSize() == 1920*1080*3);
     }

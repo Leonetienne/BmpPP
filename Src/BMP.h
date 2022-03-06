@@ -50,8 +50,8 @@ namespace Leonetienne::BmpPP {
         //! Will return the color mode of the image
         [[nodiscard]] const Colormode& GetColormode() const;
 
-        //! Will return the amount of color channels used
-        [[nodiscard]] std::size_t GetNumColorChannels() const;
+        //! Will return the amount of channels used
+        [[nodiscard]] std::size_t GetNumChannels() const;
 
         //! Will return the size of the raw pixel buffer, in bytes
         [[nodiscard]] std::size_t GetPixelbufferSize() const;
@@ -66,6 +66,12 @@ namespace Leonetienne::BmpPP {
         //! Will read a bmp image from a file.
         //! Returns false, if unable to open, or parse, file
         bool Read(const std::string& filename);
+
+        //! Will compare two images for being exactly identical regarding resolution, bit depth, and pixel values.
+        bool operator==(const BMP& other) const;
+
+        //! Will compare two images for not being exactly identical regarding resolution, bit depth, and pixel values.
+        bool operator!=(const BMP& other) const;
 
         //! Will mirror the image horizontally
         void MirrorHorizontally();
@@ -90,6 +96,9 @@ namespace Leonetienne::BmpPP {
 
         //! Will copy the specified rectangle-area, and return it as a new image
         BMP Crop(const Eule::Rect& area);
+
+        //! Will fill a specific channel with a value
+        void FillChannel(const std::size_t& channel, const std::uint8_t value);
 
     private:
         Eule::Vector2i size;
