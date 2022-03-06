@@ -81,6 +81,30 @@ TEST_CASE(__FILE__"/RuntimeErrorOnUninitialized", "[Uninitialized]")
         , std::runtime_error
     );
 
+    REQUIRE_THROWS_AS(
+        bmp.Rotate180deg()
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.Rotate90degClockwise()
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.Rotate90degCounterclockwise()
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.Crop({0,0}, {5,5})
+        , std::runtime_error
+    );
+
+    REQUIRE_THROWS_AS(
+        bmp.ConvertColormode(Colormode::RGB)
+        , std::runtime_error
+    );
     return;
 }
 

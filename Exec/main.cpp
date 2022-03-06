@@ -1,12 +1,15 @@
 #include <BMP.h>
 #include <iostream>
 #include <BmpHeader.h>
+#include <Eule/Math.h>
 
 using namespace Leonetienne::BmpPP;
+using namespace Eule;
 
 int main() {
 
 /*
+
     BMP bmp({800, 600}, Colormode::RGB);
 
     for (int x = 0; x < 800; x++)
@@ -21,14 +24,13 @@ int main() {
     }
 
     bmp.Write("write.bmp");
+
 */
+    BMP bmp("basea_hachi.bmp");
 
-    BMP bmp("basea_gradient.bmp");
+    BMP cropped = bmp.Crop(Vector2i(95, 83), Vector2i(95 + 149, 83 + 239));
 
-    BMP newBmp = bmp.MirrorHorizontally();
-    //BMP newBmp = bmp.MirrorVertically();
-
-    if(!newBmp.Write("basea_gradient_flipped_hor.bmp"))
+    if(!cropped.Write("basea_hachi_cropped.bmp"))
         std::cerr << "What the hell" << std::endl;
 
     /*
