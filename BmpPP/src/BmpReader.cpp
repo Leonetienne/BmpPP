@@ -1,6 +1,6 @@
-#include "BmpReader.h"
-#include "Colormodes.h"
-#include "BMP.h"
+#include "BmpPP/BmpReader.h"
+#include "BmpPP/Colormodes.h"
+#include "BmpPP/Bmp.h"
 #include <fstream>
 #include <cstdint>
 

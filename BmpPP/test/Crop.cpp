@@ -1,4 +1,4 @@
-#include <Bmp.h>
+#include <BmpPP/Bmp.h>
 #include <stdexcept>
 #include "Catch2.h"
 

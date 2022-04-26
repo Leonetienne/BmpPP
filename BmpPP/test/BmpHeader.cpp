@@ -1,4 +1,4 @@
-#include <BmpHeader.h>
+#include <BmpPP/BmpHeader.h>
 #include "Catch2.h"
 
 using namespace Leonetienne::BmpPP;

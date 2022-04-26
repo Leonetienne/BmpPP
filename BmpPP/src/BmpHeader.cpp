@@ -1,4 +1,4 @@
-#include "BmpHeader.h"
+#include "BmpPP/BmpHeader.h"
 
 namespace Leonetienne::BmpPP {
 

@@ -1,6 +1,6 @@
-#include "BmpWriter.h"
-#include "BmpHeader.h"
-#include "Bmp.h"
+#include "BmpPP/BmpWriter.h"
+#include "BmpPP/BmpHeader.h"
+#include "BmpPP/Bmp.h"
 #include <fstream>
 
 namespace Leonetienne::BmpPP {

@@ -4,7 +4,7 @@
 #include <Eule/Vector2.h>
 #include <vector>
 #include <cstdint>
-#include "Colormodes.h"
+#include "BmpPP/Colormodes.h"
 
 namespace Leonetienne::BmpPP {
 

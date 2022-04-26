@@ -1,8 +1,8 @@
-#include "BMP.h"
+#include "BmpPP/Bmp.h"
 #include <stdexcept>
 #include <algorithm>
-#include "BmpWriter.h"
-#include "BmpReader.h"
+#include "BmpPP/BmpWriter.h"
+#include "BmpPP/BmpReader.h"
 
 #define CHECK_IF_INITIALIZED if (!isInitialized) throw std::runtime_error("Image not initialized!");
 

@@ -1,6 +1,6 @@
-#include <BMP.h>
+#include <BmpPP/Bmp.h>
 #include <iostream>
-#include <BmpHeader.h>
+#include <BmpPP/BmpHeader.h>
 #include <Eule/Math.h>
 
 using namespace Leonetienne::BmpPP;

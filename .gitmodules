@@ -1,0 +1,3 @@
+[submodule "Eule"]
+	path = Eule
+	url = git@gitea.leonetienne.de:leonetienne/Eule.git
