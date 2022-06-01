@@ -8,13 +8,13 @@ Disclaimer!!:
  
 ## Basic Usage
 *Assuming:
-```c++
+```cpp
 using namespace Leonetienne::BmpPP;
 using namespace Leonetienne::Eule;
 ```
 
 ##### Read image
-```c++
+```cpp
 BMP bmp("cute.bmp");
 
 // or
@@ -23,12 +23,12 @@ bmp.Read("cute.bmp");
 ```
 
 ##### Write image
-```c++
+```cpp
 bmp.Write("cute.bmp");
 ```
 
 ##### Create a new image
-```c++
+```cpp
 // RGBA image
 BMP bmp(Vector2i(800, 600));
 
@@ -40,7 +40,7 @@ BMP bmp(Vector2i(800, 600), Colormode::RGB);
 ```
 
 ##### Edit pixel data
-```c++
+```cpp
 // Set pixel grayscale value
 bmp.SetPixel(Vector2i(60, 50), 128);
 
@@ -55,7 +55,7 @@ bmp.GetPixel(Vector2i(60, 50))[1] = 128;
 ```
 
 ##### Get pixel data
-```c++
+```cpp
 // Assuming image is RGBA
 std::uint8_t* pixel = bmp.GetPixel(Vector2i(60, 50));
 
@@ -66,7 +66,7 @@ std::uint8_t a = pixel[3];
 ```
 
 ##### Convert between RGB and RGBA
-```c++
+```cpp
 // This is RGBA
 BMP bmp(Vector2i(800, 600), Colormode::RGBA);
 
@@ -77,7 +77,7 @@ bmp.ConvertTo(Colormode::RGB);
 ```
 
 ##### Mirror images
-```c++
+```cpp
 // Mirror horizontally
 BMP mirroredImage_hor = image.MirrorHorizontally();
 
@@ -86,7 +86,7 @@ BMP mirroredImage_ver = image.MirrorVertically();
 ```
 
 ##### Rotate images
-```c++
+```cpp
 // Rotate by 90 degrees, clockwise
 BMP rotatedImage = image.Rotate90degClockwise();
 
@@ -98,13 +98,13 @@ BMP rotatedImage = image.Rotate180deg();
 ```
 
 ##### Crop images
-```c++
+```cpp
 // Extract the region topleft={25, 60}, size={150, 200}
 BMP cropped = bmp.Crop(Vector2i(25, 60), Vector2i(150, 200));
 ```
 
 ##### Fill channels
-```c++
+```cpp
 // Want to set the entire ALPHA channel to 255?
 bmp.FillChannel(3, 255);
 
@@ -112,7 +112,7 @@ bmp.FillChannel(3, 255);
 ```
 
 ##### Swapping channels
-```c++
+```cpp
 // Convert BGR to RGB, by swapping the red and blue channels.
 bmp.SwapChannels(0, 2);
 
@@ -120,7 +120,7 @@ bmp.SwapChannels(0, 2);
 ```
 
 ##### Feed in an existing pixel buffer
-```c++
+```cpp
 // OK, this is a bit more complex, but here's how to do it
 
 // This is assumed to be an RGBA pixel buffer, formatted like:
