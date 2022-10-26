@@ -1,3 +1,5 @@
+[![Build Status](https://drone.leonetienne.de/api/badges/leonetienne/BmpPP/status.svg)](https://drone.leonetienne.de/leonetienne/BmpPP)
+
 # BmpPP
 A simple, easy to use, BMP image interface for C++!
 
