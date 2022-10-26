@@ -14,7 +14,7 @@ steps:
           doxygen
           graphviz
           -y          
-        - cd "BmpPP/BmpPP/doxygen"
+        - cd "BmpPP/doxygen"
         - make
        
   - name: Deploy docs to production
