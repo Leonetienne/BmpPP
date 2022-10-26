@@ -43,7 +43,7 @@ steps:
       - chmod 644 ~/.ssh/id_ed25519.pub
       - chmod 644 ~/.ssh/known_hosts
       - ssh-add
-      - cd "BmpPP/BmpPP/doxygen"
+      - cd "BmpPP/doxygen"
       - >-
         rsync
         -avz
